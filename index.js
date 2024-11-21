@@ -1,8 +1,15 @@
 const express = require("express");
 const { google } = require("googleapis");
-
+let cors = require("cors");
 const app = express();
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 app.use(express.json());
+app.use(cors(corsOptions));
 
 app.post("/v1/write-sheet", async (req, res) => {
   const { name, lastName, phonenumber, birthday } = req.body;
